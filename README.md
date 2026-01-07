@@ -25,4 +25,4 @@ Webová aplikácia pre správu klientov a finančných produktov s možnosťou i
 
 1. Naklonujte repozitár:
 ```bash
-git clone https://github.com/[vas-username]/crm-kmenova-produkcia.git
+git clone https://github.com/bunnyfin/crm.git
