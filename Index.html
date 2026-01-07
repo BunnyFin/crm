@@ -15,6 +15,9 @@
             --insurance-color: #f39c12;
             --property-color: #9b59b6;
             --dashboard-color: #1abc9c;
+            --clients-color: #e67e22;
+            --opportunities-color: #9b59b6;
+            --calendar-color: #e74c3c;
             --light-bg: #f8f9fa;
             --border-color: #dee2e6;
             --text-color: #333;
@@ -339,6 +342,18 @@
             border-top: 4px solid var(--property-color);
         }
         
+        #tab-clients.active {
+            border-top: 4px solid var(--clients-color);
+        }
+        
+        #tab-opportunities.active {
+            border-top: 4px solid var(--opportunities-color);
+        }
+        
+        #tab-calendar.active {
+            border-top: 4px solid var(--calendar-color);
+        }
+        
         /* Tab button farby */
         .tab-dashboard {
             border-left: 4px solid var(--dashboard-color);
@@ -358,6 +373,18 @@
         
         .tab-property {
             border-left: 4px solid var(--property-color);
+        }
+        
+        .tab-clients {
+            border-left: 4px solid var(--clients-color);
+        }
+        
+        .tab-opportunities {
+            border-left: 4px solid var(--opportunities-color);
+        }
+        
+        .tab-calendar {
+            border-left: 4px solid var(--calendar-color);
         }
         
         /* Tab obsah */
@@ -465,7 +492,7 @@
             font-style: italic;
         }
         
-        /* Vylepšenie zobrazení súborov */
+        /* Vylepšenie zobrazenia súborov */
         .file-info {
             background-color: #f8f9fa;
             padding: 15px;
@@ -506,7 +533,7 @@
             font-size: 0.8rem;
         }
         
-        /* Vylepšenie zobrazení tabuliek */
+        /* Vylepšenie zobrazenia tabuliek */
         .clients-table th:nth-child(3),
         .clients-table td:nth-child(3) {
             min-width: 150px;
@@ -696,6 +723,350 @@
             background-color: rgba(52, 152, 219, 0.05);
         }
         
+        /* Styl pre produkty klienta */
+        .client-products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 5px;
+        }
+        
+        .product-badge {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .product-loan {
+            background-color: #fadbd8;
+            color: #c0392b;
+        }
+        
+        .product-investment {
+            background-color: #d5f4e6;
+            color: #27ae60;
+        }
+        
+        .product-insurance {
+            background-color: #fdebd0;
+            color: #d35400;
+        }
+        
+        .product-property {
+            background-color: #e8daef;
+            color: #8e44ad;
+        }
+        
+        /* Styl pre zoznam klientov */
+        .client-contact {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .client-products-summary {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* Styl pre príležitosti */
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .opportunity-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--opportunities-color);
+        }
+        
+        .opportunity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .opportunity-header h4 {
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .opportunity-badge {
+            background-color: var(--opportunities-color);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        
+        .opportunity-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .opportunity-item {
+            padding: 10px;
+            background-color: var(--light-bg);
+            margin-bottom: 8px;
+            border-radius: 6px;
+            border-left: 3px solid var(--secondary-color);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .opportunity-item:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .opportunity-priority {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        
+        .priority-high {
+            background-color: #fadbd8;
+            color: #c0392b;
+        }
+        
+        .priority-medium {
+            background-color: #fdebd0;
+            color: #d35400;
+        }
+        
+        .priority-low {
+            background-color: #d5f4e6;
+            color: #27ae60;
+        }
+        
+        /* Modal pre detail klienta */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+        }
+        
+        .close {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #ccc;
+        }
+        
+        .modal-body {
+            padding: 20px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .client-profile {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .client-info-section {
+            background-color: var(--light-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .client-info-section h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .client-notes textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            resize: vertical;
+        }
+        
+        /* Kalendár */
+        .calendar-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+        
+        .calendar-week {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .calendar-day {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            min-height: 150px;
+        }
+        
+        .day-header {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .meeting-item {
+            background-color: #e3f2fd;
+            padding: 5px 8px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-left: 3px solid var(--secondary-color);
+        }
+        
+        .meeting-item:hover {
+            background-color: #bbdefb;
+        }
+        
+        .upcoming-meetings {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .meeting-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .email-templates {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+        
+        .template-item {
+            background-color: var(--light-bg);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 3px solid var(--secondary-color);
+        }
+        
+        .template-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .template-content {
+            background-color: white;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            margin-bottom: 10px;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-details {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn-details:hover {
+            background-color: #e9ecef;
+        }
+        
         /* Responsívne úpravy */
         @media (max-width: 1200px) {
             .main-content {
@@ -712,6 +1083,14 @@
             
             .filters-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .client-profile {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendar-container {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -741,6 +1120,19 @@
             
             .filters-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .opportunities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10px auto;
             }
         }
         
@@ -912,19 +1304,19 @@
                             <h4><i class="fas fa-chart-pie"></i> Štatistika</h4>
                             <div class="summary-stats">
                                 <div class="stat-item">
-                                    <span>Úvery :</span>
+                                    <span>Úvery:</span>
                                     <span class="stat-value" id="stat-loans">0</span>
                                 </div>
                                 <div class="stat-item">
-                                    <span>Investície :</span>
+                                    <span>Investície:</span>
                                     <span class="stat-value" id="stat-investments">0</span>
                                 </div>
                                 <div class="stat-item">
-                                    <span>Životné poistenie :</span>
+                                    <span>Životné poistenie:</span>
                                     <span class="stat-value" id="stat-insurance">0</span>
                                 </div>
                                 <div class="stat-item">
-                                    <span>Majetok :</span>
+                                    <span>Majetok:</span>
                                     <span class="stat-value" id="stat-property">0</span>
                                 </div>
                             </div>
@@ -961,10 +1353,10 @@
                     <div class="instructions">
                         <h4><i class="fas fa-info-circle"></i> Klasifikácia produktov</h4>
                         <ul>
-                            <li><strong>Úvery </strong>: Úvery zabezpečené nehnuteľnosťou, mPôžička Plus, úvery na bývanie</li>
-                            <li><strong>Investície </strong>: Depozitné kontá, fondy, ETF, investičné produkty</li>
-                            <li><strong>Životné poistenie </strong>: NN Partner, životné poistenia</li>
-                            <li><strong>Majetok </strong>: Povinné zmluvné poistenie, domácnosti, cestovné poistenie, kasko </li>
+                            <li><strong>Úvery (UV)</strong>: Úvery zabezpečené nehnuteľnosťou, mPôžička Plus, úvery na bývanie</li>
+                            <li><strong>Investície (F, FS)</strong>: Depozitné kontá, fondy, ETF, investičné produkty</li>
+                            <li><strong>Životné poistenie (ZH, ZP)</strong>: NN Partner, životné poistenia</li>
+                            <li><strong>Majetok (DBD, KAS, PZP, N)</strong>: Povinné zmluvné poistenie, domácnosti, cestovné poistenie, kasko</li>
                         </ul>
                         <p style="margin-top: 10px; font-size: 0.85rem; color: #666;"><strong>Poznámka:</strong> Vaše CSV súbory sú uložené lokálne a viditeľné len pre vás.</p>
                     </div>
@@ -975,22 +1367,32 @@
                         <button class="tab-button active tab-dashboard" data-tab="dashboard">
                             <i class="fas fa-tachometer-alt"></i> Dashboard
                         </button>
+                        <button class="tab-button tab-clients" data-tab="clients">
+                            <i class="fas fa-users"></i> Klienti
+                        </button>
+                        <button class="tab-button tab-opportunities" data-tab="opportunities">
+                            <i class="fas fa-lightbulb"></i> Príležitosti
+                        </button>
+                        <button class="tab-button tab-calendar" data-tab="calendar">
+                            <i class="fas fa-calendar-alt"></i> Kalendár
+                        </button>
                         <button class="tab-button tab-loans" data-tab="loans">
-                            <i class="fas fa-hand-holding-usd"></i> Úvery 
+                            <i class="fas fa-hand-holding-usd"></i> Úvery
                         </button>
                         <button class="tab-button tab-investments" data-tab="investments">
-                            <i class="fas fa-chart-line"></i> Investície 
+                            <i class="fas fa-chart-line"></i> Investície
                         </button>
                         <button class="tab-button tab-insurance" data-tab="insurance">
-                            <i class="fas fa-heartbeat"></i> Životné poistenie 
+                            <i class="fas fa-heartbeat"></i> Životné poistenie
                         </button>
                         <button class="tab-button tab-property" data-tab="property">
-                            <i class="fas fa-home"></i> Majetok 
+                            <i class="fas fa-home"></i> Majetok
                         </button>
                     </div>
                     
                     <!-- Dashboard -->
                     <div id="tab-dashboard" class="tab-content active">
+                        <!-- Obsah dashboardu zostáva rovnaký -->
                         <div class="tab-header">
                             <h3><i class="fas fa-tachometer-alt"></i> Dashboard - Prehľad</h3>
                             <div class="client-count">Celkový počet zmlúv: <span id="total-count">0</span></div>
@@ -1041,15 +1443,15 @@
                                     <label for="filter-product-type">Typ produktu</label>
                                     <select id="filter-product-type">
                                         <option value="">Všetky typy</option>
-                                        <option value="UV">Úvery </option>
-                                        <option value="F">Investície </option>
-                                        <option value="FS">Investície </option>
-                                        <option value="ZH">Životné poistenie </option>
+                                        <option value="UV">Úvery</option>
+                                        <option value="F">Investície</option>
+                                        <option value="FS">Investície</option>
+                                        <option value="ZH">Životné poistenie</option>
+                                        <option value="ZP">Životné poistenie</option>
                                         <option value="PZP">PZP</option>
                                         <option value="DBD">DBD</option>
                                         <option value="N">Cestovné</option>
                                         <option value="KAS">KASKO</option>
-                                        <option value="ZP">Životné poistenie</option>
                                     </select>
                                 </div>
                                 
@@ -1154,10 +1556,256 @@
                         </div>
                     </div>
                     
+                    <!-- Klienti -->
+                    <div id="tab-clients" class="tab-content">
+                        <div class="tab-header">
+                            <h3><i class="fas fa-users"></i> Prehľad klientov</h3>
+                            <div class="client-count">Počet klientov: <span id="clients-count">0</span></div>
+                        </div>
+                        <table class="clients-table">
+                            <thead>
+                                <tr>
+                                    <th>Klient</th>
+                                    <th>Kontakt</th>
+                                    <th>Produkty</th>
+                                    <th>Počet zmlúv</th>
+                                    <th>Celková ročná suma</th>
+                                    <th>Posledná zmluva</th>
+                                    <th>Akcie</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clients-table-body">
+                                <tr>
+                                    <td colspan="7" class="no-data">Naimportujte údaje zo CSV súboru</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Príležitosti -->
+                    <div id="tab-opportunities" class="tab-content">
+                        <div class="tab-header">
+                            <h3><i class="fas fa-lightbulb"></i> Príležitosti a doporučenia</h3>
+                            <div class="client-count">Aktívne príležitosti: <span id="opportunities-count">0</span></div>
+                        </div>
+                        
+                        <div class="opportunities-grid">
+                            <!-- Cross-selling príležitosti -->
+                            <div class="opportunity-card">
+                                <div class="opportunity-header">
+                                    <h4><i class="fas fa-random"></i> Cross-selling</h4>
+                                    <span class="opportunity-badge" id="cross-selling-count">0</span>
+                                </div>
+                                <p>Klienti, ktorým môžete ponúknuť doplnkové produkty</p>
+                                <ul class="opportunity-list" id="cross-selling-list">
+                                    <li class="no-data">Žiadne príležitosti</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Up-selling príležitosti -->
+                            <div class="opportunity-card">
+                                <div class="opportunity-header">
+                                    <h4><i class="fas fa-chart-line"></i> Up-selling</h4>
+                                    <span class="opportunity-badge" id="up-selling-count">0</span>
+                                </div>
+                                <p>Klienti s potenciálom na zvýšenie hodnoty produktov</p>
+                                <ul class="opportunity-list" id="up-selling-list">
+                                    <li class="no-data">Žiadne príležitosti</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Výročia -->
+                            <div class="opportunity-card">
+                                <div class="opportunity-header">
+                                    <h4><i class="fas fa-calendar-alt"></i> Blížiace sa výročia</h4>
+                                    <span class="opportunity-badge" id="anniversary-count">0</span>
+                                </div>
+                                <p>Vhodná príležitosť na obnovenie alebo rozšírenie zmlúv</p>
+                                <ul class="opportunity-list" id="anniversary-list-opportunities">
+                                    <li class="no-data">Žiadne príležitosti</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Noví klienti -->
+                            <div class="opportunity-card">
+                                <div class="opportunity-header">
+                                    <h4><i class="fas fa-user-plus"></i> Noví klienti</h4>
+                                    <span class="opportunity-badge" id="new-clients-count">0</span>
+                                </div>
+                                <p>Klienti s len jedným produktom - potenciál pre rozšírenie</p>
+                                <ul class="opportunity-list" id="new-clients-list">
+                                    <li class="no-data">Žiadne príležitosti</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Emailové šablóny -->
+                        <div class="email-templates">
+                            <div class="chart-title">
+                                <i class="fas fa-envelope"></i> Emailové šablóny
+                            </div>
+                            
+                            <div class="template-item">
+                                <div class="template-header">
+                                    <h5>Pripomienka výročia</h5>
+                                    <button class="btn-details copy-template" data-template="anniversary">
+                                        <i class="fas fa-copy"></i> Kopírovať
+                                    </button>
+                                </div>
+                                <div class="template-content" id="template-anniversary">
+Vážený klient [Meno],
+
+blíži sa výročie Vášho produktu [Názov produktu] (výročie: [Dátum výročia]).
+
+Toto je vhodná príležitosť na prehodnotenie Vašich potrieb a možnosti rozšírenia ochrany.
+
+S pozdravom,
+[Vaše meno]
+Finančný poradca</div>
+                            </div>
+                            
+                            <div class="template-item">
+                                <div class="template-header">
+                                    <h5>Ponuka doplnkového produktu</h5>
+                                    <button class="btn-details copy-template" data-template="cross-selling">
+                                        <i class="fas fa-copy"></i> Kopírovať
+                                    </button>
+                                </div>
+                                <div class="template-content" id="template-cross-selling">
+Vážený klient [Meno],
+
+na základe Vášho súčasného portfólia produktov Vám odporúčam doplnkový produkt, ktorý by Vám mohol poskytnúť lepšiu ochranu/vyššie výnosy.
+
+Aktuálne máte: [Aktuálne produkty]
+Odporúčam: [Odporúčaný produkt]
+Dôvod: [Dôvod odporúčania]
+
+S pozdravom,
+[Vaše meno]
+Finančný poradca</div>
+                            </div>
+                            
+                            <div class="template-item">
+                                <div class="template-header">
+                                    <h5>Pozvanie na schôdzku</h5>
+                                    <button class="btn-details copy-template" data-template="meeting">
+                                        <i class="fas fa-copy"></i> Kopírovať
+                                    </button>
+                                </div>
+                                <div class="template-content" id="template-meeting">
+Vážený klient [Meno],
+
+rád by som Vás pozval na osobnú schôdzku, kde by sme mohli prehodnotiť Vaše súčasné finančné produkty a diskutovať o možnostiach ich optimalizácie.
+
+Navrhovaný dátum: [Navrhovaný dátum]
+Miesto: [Miesto schôdzky]
+
+S pozdravom,
+[Vaše meno]
+Finančný poradca</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Kalendár -->
+                    <div id="tab-calendar" class="tab-content">
+                        <div class="tab-header">
+                            <h3><i class="fas fa-calendar-alt"></i> Kalendár schôdzok</h3>
+                            <button id="addMeeting" class="btn-primary">
+                                <i class="fas fa-plus"></i> Nová schôdzka
+                            </button>
+                        </div>
+                        
+                        <!-- Formulár pre novú schôdzku -->
+                        <div class="meeting-form" id="meetingForm" style="display: none;">
+                            <h4><i class="fas fa-plus-circle"></i> Nová schôdzka</h4>
+                            <div class="form-row">
+                                <div class="filter-group">
+                                    <label for="meetingClient">Klient</label>
+                                    <select id="meetingClient">
+                                        <option value="">Vyberte klienta</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <label for="meetingDate">Dátum a čas</label>
+                                    <input type="datetime-local" id="meetingDate">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="filter-group">
+                                    <label for="meetingType">Typ schôdzky</label>
+                                    <select id="meetingType">
+                                        <option value="consultation">Konzultácia</option>
+                                        <option value="signature">Podpis zmluvy</option>
+                                        <option value="review">Prehodnotenie</option>
+                                        <option value="anniversary">Výročie</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <label for="meetingDuration">Trvanie (minúty)</label>
+                                    <input type="number" id="meetingDuration" value="60" min="15" step="15">
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <label for="meetingNotes">Poznámky</label>
+                                <textarea id="meetingNotes" rows="3" placeholder="Poznámky k schôdzke..."></textarea>
+                            </div>
+                            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                                <button id="saveMeeting" class="btn-primary">
+                                    <i class="fas fa-save"></i> Uložiť schôdzku
+                                </button>
+                                <button id="cancelMeeting" class="btn-details">
+                                    Zrušiť
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="calendar-container">
+                            <div>
+                                <div class="calendar-week" id="calendarWeek">
+                                    <!-- Kalendár sa naplní dynamicky -->
+                                </div>
+                                <div class="anniversary-list">
+                                    <div class="chart-title">
+                                        <i class="fas fa-bell"></i> Najbližšie výročia pre schôdzky
+                                    </div>
+                                    <table class="anniversary-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Klient</th>
+                                                <th>Produkt</th>
+                                                <th>Dátum výročia</th>
+                                                <th>Zostávajúce dni</th>
+                                                <th>Akcia</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="calendar-anniversary-table">
+                                            <tr>
+                                                <td colspan="5" class="no-data">Naimportujte údaje zo CSV súboru</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="upcoming-meetings">
+                                <h4><i class="fas fa-clock"></i> Nadchádzajúce schôdzky</h4>
+                                <ul class="opportunity-list" id="upcoming-meetings-list">
+                                    <li class="no-data">Žiadne naplánované schôdzky</li>
+                                </ul>
+                                
+                                <h4 style="margin-top: 20px;"><i class="fas fa-history"></i> Minulé schôdzky</h4>
+                                <ul class="opportunity-list" id="past-meetings-list">
+                                    <li class="no-data">Žiadne minulé schôdzky</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- Úvery -->
                     <div id="tab-loans" class="tab-content">
                         <div class="tab-header">
-                            <h3><i class="fas fa-hand-holding-usd"></i> Úvery </h3>
+                            <h3><i class="fas fa-hand-holding-usd"></i> Úvery</h3>
                             <div class="client-count">Počet zmlúv: <span id="loans-count">0</span></div>
                         </div>
                         <table class="clients-table">
@@ -1183,7 +1831,7 @@
                     <!-- Investície -->
                     <div id="tab-investments" class="tab-content">
                         <div class="tab-header">
-                            <h3><i class="fas fa-chart-line"></i> Investície </h3>
+                            <h3><i class="fas fa-chart-line"></i> Investície</h3>
                             <div class="client-count">Počet zmlúv: <span id="investments-count">0</span></div>
                         </div>
                         <table class="clients-table">
@@ -1209,7 +1857,7 @@
                     <!-- Životné poistenie -->
                     <div id="tab-insurance" class="tab-content">
                         <div class="tab-header">
-                            <h3><i class="fas fa-heartbeat"></i> Životné poistenie </h3>
+                            <h3><i class="fas fa-heartbeat"></i> Životné poistenie</h3>
                             <div class="client-count">Počet zmlúv: <span id="insurance-count">0</span></div>
                         </div>
                         <table class="clients-table">
@@ -1235,7 +1883,7 @@
                     <!-- Majetok -->
                     <div id="tab-property" class="tab-content">
                         <div class="tab-header">
-                            <h3><i class="fas fa-home"></i> Majetok </h3>
+                            <h3><i class="fas fa-home"></i> Majetok</h3>
                             <div class="client-count">Počet zmlúv: <span id="property-count">0</span></div>
                         </div>
                         <table class="clients-table">
@@ -1263,6 +1911,82 @@
             <footer>
                 <p>CRM Systém pre správu kmeňovej produkcia | Prihlásený používateľ: <span id="footerUsername"></span> | Dátum: <span id="currentDate"></span></p>
             </footer>
+        </div>
+    </div>
+
+    <!-- Modal pre detail klienta -->
+    <div id="clientModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user"></i> Profil klienta</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="client-profile">
+                    <div>
+                        <div class="client-info-section">
+                            <h4><i class="fas fa-info-circle"></i> Informácie o klientovi</h4>
+                            <div class="form-row">
+                                <div class="filter-group">
+                                    <label>Meno klienta</label>
+                                    <p id="modal-client-name" style="font-weight: 600; font-size: 1.1rem;"></p>
+                                </div>
+                                <div class="filter-group">
+                                    <label>Typ klienta</label>
+                                    <p id="modal-client-type"></p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="filter-group">
+                                    <label>Telefón</label>
+                                    <p id="modal-client-phone"></p>
+                                </div>
+                                <div class="filter-group">
+                                    <label>E-mail</label>
+                                    <p id="modal-client-email"></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="client-info-section">
+                            <h4><i class="fas fa-chart-bar"></i> Štatistiky</h4>
+                            <div class="form-row">
+                                <div class="filter-group">
+                                    <label>Počet zmlúv</label>
+                                    <p id="modal-contracts-count" style="font-weight: 600;"></p>
+                                </div>
+                                <div class="filter-group">
+                                    <label>Celková ročná suma</label>
+                                    <p id="modal-total-amount" style="font-weight: 600;"></p>
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <label>Produkty</label>
+                                <div id="modal-client-products" class="client-products"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="client-info-section">
+                            <h4><i class="fas fa-lightbulb"></i> Doporučenia</h4>
+                            <div id="modal-client-recommendations">
+                                <p class="no-data" style="padding: 20px;">Načítavam doporučenia...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="client-info-section">
+                            <h4><i class="fas fa-sticky-note"></i> Poznámky</h4>
+                            <textarea id="modal-client-notes" rows="6" placeholder="Pridajte poznámky o klientovi..."></textarea>
+                            <div style="margin-top: 10px;">
+                                <button id="save-client-notes" class="btn-primary">
+                                    <i class="fas fa-save"></i> Uložiť poznámky
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1305,7 +2029,9 @@
                         totalInvestmentsAmount: 0,
                         totalInsuranceAmount: 0,
                         totalPropertyAmount: 0
-                    }
+                    },
+                    clientNotes: {},
+                    meetings: []
                 };
                 
                 this.saveToStorage();
@@ -1349,7 +2075,9 @@
                             totalInvestmentsAmount: 0,
                             totalInsuranceAmount: 0,
                             totalPropertyAmount: 0
-                        }
+                        },
+                        clientNotes: {},
+                        meetings: []
                     };
                 }
                 
@@ -1400,7 +2128,9 @@
                             totalInvestmentsAmount: 0,
                             totalInsuranceAmount: 0,
                             totalPropertyAmount: 0
-                        }
+                        },
+                        clientNotes: {},
+                        meetings: []
                     };
                 }
                 
@@ -1423,12 +2153,108 @@
                             totalInvestmentsAmount: 0,
                             totalInsuranceAmount: 0,
                             totalPropertyAmount: 0
-                        }
+                        },
+                        clientNotes: {},
+                        meetings: []
                     };
                 }
                 
                 this.userData[username].stats = stats;
                 this.saveToStorage();
+            }
+            
+            // Uloženie poznámok klienta
+            saveClientNotes(username, clientId, notes) {
+                if (!this.userData[username]) {
+                    this.userData[username] = {
+                        csvFiles: [],
+                        currentData: null,
+                        stats: { 
+                            loans: 0, 
+                            investments: 0, 
+                            insurance: 0, 
+                            property: 0,
+                            totalLoansAmount: 0,
+                            totalInvestmentsAmount: 0,
+                            totalInsuranceAmount: 0,
+                            totalPropertyAmount: 0
+                        },
+                        clientNotes: {},
+                        meetings: []
+                    };
+                }
+                
+                if (!this.userData[username].clientNotes) {
+                    this.userData[username].clientNotes = {};
+                }
+                
+                this.userData[username].clientNotes[clientId] = notes;
+                this.saveToStorage();
+            }
+            
+            // Získanie poznámok klienta
+            getClientNotes(username, clientId) {
+                if (!this.userData[username] || !this.userData[username].clientNotes) {
+                    return '';
+                }
+                
+                return this.userData[username].clientNotes[clientId] || '';
+            }
+            
+            // Uloženie schôdzky
+            saveMeeting(username, meeting) {
+                if (!this.userData[username]) {
+                    this.userData[username] = {
+                        csvFiles: [],
+                        currentData: null,
+                        stats: { 
+                            loans: 0, 
+                            investments: 0, 
+                            insurance: 0, 
+                            property: 0,
+                            totalLoansAmount: 0,
+                            totalInvestmentsAmount: 0,
+                            totalInsuranceAmount: 0,
+                            totalPropertyAmount: 0
+                        },
+                        clientNotes: {},
+                        meetings: []
+                    };
+                }
+                
+                if (!this.userData[username].meetings) {
+                    this.userData[username].meetings = [];
+                }
+                
+                meeting.id = meeting.id || Date.now().toString();
+                this.userData[username].meetings.push(meeting);
+                this.saveToStorage();
+                return meeting.id;
+            }
+            
+            // Získanie schôdzok
+            getMeetings(username) {
+                if (!this.userData[username] || !this.userData[username].meetings) {
+                    return [];
+                }
+                
+                return this.userData[username].meetings;
+            }
+            
+            // Odstránenie schôdzky
+            removeMeeting(username, meetingId) {
+                if (!this.userData[username] || !this.userData[username].meetings) {
+                    return false;
+                }
+                
+                const meetingIndex = this.userData[username].meetings.findIndex(m => m.id === meetingId);
+                if (meetingIndex !== -1) {
+                    this.userData[username].meetings.splice(meetingIndex, 1);
+                    this.saveToStorage();
+                    return true;
+                }
+                
+                return false;
             }
             
             // Získanie štatistík používateľa
@@ -1510,6 +2336,23 @@
         const filterAmountMin = document.getElementById('filter-amount-min');
         const filterAmountMax = document.getElementById('filter-amount-max');
         
+        // Kalendár elementy
+        const addMeetingBtn = document.getElementById('addMeeting');
+        const meetingForm = document.getElementById('meetingForm');
+        const saveMeetingBtn = document.getElementById('saveMeeting');
+        const cancelMeetingBtn = document.getElementById('cancelMeeting');
+        const meetingClient = document.getElementById('meetingClient');
+        const meetingDate = document.getElementById('meetingDate');
+        const meetingType = document.getElementById('meetingType');
+        const meetingDuration = document.getElementById('meetingDuration');
+        const meetingNotes = document.getElementById('meetingNotes');
+        
+        // Modal elementy
+        const clientModal = document.getElementById('clientModal');
+        const closeModal = document.querySelector('.close');
+        const saveClientNotesBtn = document.getElementById('save-client-notes');
+        const modalClientNotes = document.getElementById('modal-client-notes');
+        
         // Grafy
         let productsChart = null;
         let anniversaryChart = null;
@@ -1517,6 +2360,8 @@
         // Hlavné funkcie aplikácie
         let allContracts = [];
         let filteredContracts = [];
+        let clientsData = {};
+        let currentClientId = null;
         
         // Kontrola prihlásenia a zobrazenie príslušnej časti
         function checkAuthState() {
@@ -1532,6 +2377,9 @@
                 
                 // Načítanie uložených súborov používateľa
                 loadUserFiles();
+                
+                // Načítanie schôdzok
+                loadMeetings();
                 
                 // Načítanie vzorových dát
                 loadSampleData();
@@ -1609,8 +2457,55 @@
             });
         }
         
+        // Funkcia na zobrazenie správ
+        function showMessage(element, text, type) {
+            element.textContent = text;
+            element.className = 'auth-message';
+            element.classList.add(type === 'success' ? 'success-message' : 'error-message');
+        }
+        
+        // Tab funkcie pre hlavné záložky
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                
+                // Odstrániť active class zo všetkých tabov
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Pridať active class aktuálnemu tabu
+                this.classList.add('active');
+                document.getElementById(`tab-${tabId}`).classList.add('active');
+                
+                // Ak sa prepína na dashboard, aktualizovať grafy
+                if (tabId === 'dashboard' && allContracts.length > 0) {
+                    updateDashboard();
+                }
+                
+                // Ak sa prepína na klientov, aktualizovať zoznam klientov
+                if (tabId === 'clients' && allContracts.length > 0) {
+                    updateClientsList();
+                }
+                
+                // Ak sa prepína na príležitosti, aktualizovať príležitosti
+                if (tabId === 'opportunities' && allContracts.length > 0) {
+                    updateOpportunities();
+                }
+                
+                // Ak sa prepína na kalendár, aktualizovať kalendár
+                if (tabId === 'calendar' && allContracts.length > 0) {
+                    updateCalendar();
+                }
+            });
+        });
+        
         // Auth event listeners
-        loginTab.addEventListener('click', () => {
+        loginTab.addEventListener('click', function() {
             loginTab.classList.add('active');
             registerTab.classList.remove('active');
             loginForm.classList.add('active');
@@ -1619,7 +2514,7 @@
             registerMessage.textContent = '';
         });
         
-        registerTab.addEventListener('click', () => {
+        registerTab.addEventListener('click', function() {
             registerTab.classList.add('active');
             loginTab.classList.remove('active');
             registerForm.classList.add('active');
@@ -1628,7 +2523,7 @@
             registerMessage.textContent = '';
         });
         
-        loginBtn.addEventListener('click', () => {
+        loginBtn.addEventListener('click', function() {
             const username = loginUsername.value.trim();
             const password = loginPassword.value.trim();
             
@@ -1656,7 +2551,7 @@
             }
         });
         
-        registerBtn.addEventListener('click', () => {
+        registerBtn.addEventListener('click', function() {
             const username = registerUsername.value.trim();
             const password = registerPassword.value.trim();
             const confirmPassword = registerConfirmPassword.value.trim();
@@ -1692,42 +2587,10 @@
             }
         });
         
-        logoutBtn.addEventListener('click', () => {
+        logoutBtn.addEventListener('click', function() {
             userSystem.logout();
             localStorage.removeItem('crm_current_user');
             checkAuthState();
-        });
-        
-        // Funkcia na zobrazenie správ
-        function showMessage(element, text, type) {
-            element.textContent = text;
-            element.className = 'auth-message';
-            element.classList.add(type === 'success' ? 'success-message' : 'error-message');
-        }
-        
-        // Tab funkcie
-        document.querySelectorAll('.tab-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const tabId = button.getAttribute('data-tab');
-                
-                // Odstrániť active class zo všetkých tabov
-                document.querySelectorAll('.tab-button').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                // Pridať active class aktuálnemu tabu
-                button.classList.add('active');
-                document.getElementById(`tab-${tabId}`).classList.add('active');
-                
-                // Ak sa prepína na dashboard, aktualizovať grafy
-                if (tabId === 'dashboard' && allContracts.length > 0) {
-                    updateDashboard();
-                }
-            });
         });
         
         // CSV import
@@ -1773,6 +2636,58 @@
             applyFilters();
         });
         
+        // Kalendár event listeners
+        addMeetingBtn.addEventListener('click', function() {
+            meetingForm.style.display = 'block';
+            // Naplniť dropdown s klientmi
+            populateClientDropdown();
+            // Nastaviť aktuálny dátum a čas
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            meetingDate.value = now.toISOString().slice(0, 16);
+        });
+        
+        cancelMeetingBtn.addEventListener('click', function() {
+            meetingForm.style.display = 'none';
+            clearMeetingForm();
+        });
+        
+        saveMeetingBtn.addEventListener('click', function() {
+            saveMeeting();
+        });
+        
+        // Modal event listeners
+        closeModal.addEventListener('click', function() {
+            clientModal.style.display = 'none';
+        });
+        
+        saveClientNotesBtn.addEventListener('click', function() {
+            if (currentClientId) {
+                userSystem.saveClientNotes(
+                    userSystem.getCurrentUser(),
+                    currentClientId,
+                    modalClientNotes.value
+                );
+                alert('Poznámky boli uložené');
+            }
+        });
+        
+        // Kopírovanie emailových šablón
+        document.querySelectorAll('.copy-template').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const templateId = this.getAttribute('data-template');
+                const templateContent = document.getElementById(`template-${templateId}`).textContent;
+                
+                navigator.clipboard.writeText(templateContent).then(() => {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i> Skopírované';
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                    }, 2000);
+                });
+            });
+        });
+        
         // Funkcia na parsovanie CSV dát (oddelené bodkočiarkou)
         function parseCSVData(csvData) {
             // Odstrániť BOM znak ak existuje
@@ -1788,6 +2703,7 @@
             );
             
             allContracts = [];
+            clientsData = {};
             
             for (let i = 1; i < lines.length; i++) {
                 if (lines[i].trim() === '') continue;
@@ -1823,15 +2739,38 @@
                         annualAmount = amount * 2;
                     }
                     
+                    // Pre úvery: ak je frekvencia "jednorázovo", tak ročná suma = celková suma
+                    // Pre úvery: ak je frekvencia iná, tak ročná suma = výška splátky * 12
+                    if (contract['Typ produktu'] === 'UV') {
+                        if (frequency === 'jednorázovo') {
+                            annualAmount = amount; // Celková suma úveru
+                        } else {
+                            // Pre úverové splátky - ročná suma = mesačná splátka * 12
+                            annualAmount = amount * 12;
+                        }
+                    }
+                    
+                    // Získanie kontaktných údajov
+                    const email = contract['E-mail'] || '';
+                    const phone = contract['Telefón'] || '';
+                    
+                    // Identifikátor klienta
+                    const clientId = contract['Meno klienta'] && contract['Priezvisko / Firma'] ? 
+                        `${contract['Meno klienta']}|${contract['Priezvisko / Firma']}` :
+                        contract['Priezvisko / Firma'] || 'Neznámy klient';
+                    
                     // Pridať formátované údaje pre ľahšie spracovanie
                     contract.formatted = {
                         id: contract['Číslo návrhu'] || '',
                         contractId: contract['Číslo zmluvy'] || '',
+                        clientId: clientId,
                         clientName: formatClientName(
                             contract['Meno klienta'], 
                             contract['Priezvisko / Firma'],
                             isCompany
                         ),
+                        email: email,
+                        phone: phone,
                         productType: contract['Typ produktu'] || '',
                         productName: contract['Názov produktu'] || '',
                         amount: contract['Objem platby'] || '0',
@@ -1840,9 +2779,9 @@
                         partnerId: contract['ID Partnera'] || '',
                         frequency: contract['Frekvencia'] || '',
                         status: 'A', // Východzie ako aktívna
-                        anniversaryDate: getAnniversaryDate(contract['Dátum podpisu návrhu']) || '',
+                        anniversaryDate: getNextAnniversaryDate(contract['Dátum podpisu návrhu']) || '',
                         isCompany: isCompany,
-                        daysToAnniversary: calculateDaysToAnniversaryNumber(contract['Dátum podpisu návrhu'])
+                        daysToAnniversary: calculateDaysToNextAnniversary(contract['Dátum podpisu návrhu'])
                     };
                     
                     // Odstrániť duplicitné záznamy
@@ -1852,6 +2791,32 @@
                     
                     if (!isDuplicate) {
                         allContracts.push(contract);
+                        
+                        // Pridať do zoznamu klientov
+                        if (!clientsData[clientId]) {
+                            clientsData[clientId] = {
+                                name: contract.formatted.clientName,
+                                email: email,
+                                phone: phone,
+                                isCompany: isCompany,
+                                contracts: [],
+                                productTypes: new Set(),
+                                totalAnnualAmount: 0,
+                                lastContractDate: '',
+                                recommendations: []
+                            };
+                        }
+                        
+                        clientsData[clientId].contracts.push(contract);
+                        clientsData[clientId].productTypes.add(contract['Typ produktu']);
+                        clientsData[clientId].totalAnnualAmount += annualAmount;
+                        
+                        // Aktualizovať dátum poslednej zmluvy
+                        const contractDate = parseDateString(contract.formatted.date);
+                        const lastDate = parseDateString(clientsData[clientId].lastContractDate);
+                        if (contractDate > lastDate) {
+                            clientsData[clientId].lastContractDate = contract.formatted.date;
+                        }
                     }
                 }
             }
@@ -1908,8 +2873,8 @@
             return `${firstName} ${lastName}`;
         }
         
-        // Získanie dátumu výročia (pridanie 1 rok k dátumu podpisu)
-        function getAnniversaryDate(signDate) {
+        // Získanie dátumu najbližšieho výročia v aktuálnom roku
+        function getNextAnniversaryDate(signDate) {
             if (!signDate || signDate.trim() === '') return '';
             
             const dateParts = signDate.split('.');
@@ -1920,8 +2885,16 @@
                 
                 if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
                     const signDateObj = new Date(year, month, day);
-                    const anniversaryDate = new Date(signDateObj);
-                    anniversaryDate.setFullYear(signDateObj.getFullYear() + 1);
+                    const today = new Date();
+                    const currentYear = today.getFullYear();
+                    
+                    // Vytvoriť dátum výročia v aktuálnom roku
+                    let anniversaryDate = new Date(currentYear, month, day);
+                    
+                    // Ak už výročie tento rok prešlo, pridaj rok
+                    if (anniversaryDate < today) {
+                        anniversaryDate.setFullYear(currentYear + 1);
+                    }
                     
                     // Formátovanie späť na DD.MM.YYYY
                     return `${anniversaryDate.getDate().toString().padStart(2, '0')}.${(anniversaryDate.getMonth() + 1).toString().padStart(2, '0')}.${anniversaryDate.getFullYear()}`;
@@ -1931,11 +2904,14 @@
             return '';
         }
         
-        // Vypočítať počet dní do výročia (číslo)
-        function calculateDaysToAnniversaryNumber(signDate) {
+        // Vypočítať počet dní do najbližšieho výročia
+        function calculateDaysToNextAnniversary(signDate) {
             if (!signDate || signDate.trim() === '') return 9999;
             
-            const dateParts = signDate.split('.');
+            const nextAnniversary = getNextAnniversaryDate(signDate);
+            if (!nextAnniversary) return 9999;
+            
+            const dateParts = nextAnniversary.split('.');
             
             if (dateParts.length === 3) {
                 const day = parseInt(dateParts[0]);
@@ -1947,11 +2923,9 @@
                 }
                 
                 const today = new Date();
-                const signDateObj = new Date(year, month, day);
-                const anniversaryDate = new Date(signDateObj);
-                anniversaryDate.setFullYear(signDateObj.getFullYear() + 1);
+                const anniversaryDate = new Date(year, month, day);
                 
-                // Ak už výročie prešlo, vrátiť záporné číslo
+                // Vypočítať rozdiel v dňoch
                 const diffTime = anniversaryDate - today;
                 return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             }
@@ -2111,7 +3085,7 @@
             
             const insurance = allContracts.filter(contract => {
                 const productType = contract['Typ produktu'] || '';
-                return productType === 'ZH'|| productType === 'ZP';
+                return productType === 'ZH' || productType === 'ZP';
             });
             
             const property = allContracts.filter(contract => {
@@ -2158,6 +3132,15 @@
             displayContractsInTable(insurance, 'insurance-table-body');
             displayContractsInTable(property, 'property-table-body');
             
+            // Aktualizovať zoznam klientov
+            updateClientsList();
+            
+            // Aktualizovať príležitosti
+            updateOpportunities();
+            
+            // Aktualizovať kalendár
+            updateCalendar();
+            
             // Aktualizovať dashboard
             updateDashboard();
         }
@@ -2178,7 +3161,8 @@
             tableBody.innerHTML = '';
             
             contracts.forEach(contract => {
-                const daysToAnniversary = calculateDaysToAnniversary(contract.formatted.anniversaryDate);
+                const daysToAnniversary = contract.formatted.daysToAnniversary;
+                const daysText = daysToAnniversary === 9999 ? 'N/A' : `${daysToAnniversary} dní`;
                 const daysBadgeClass = getDaysBadgeClass(daysToAnniversary);
                 const statusClass = 'status-active';
                 const statusText = 'Aktívna';
@@ -2187,7 +3171,7 @@
                 const amountFormatted = formatAmount(contract.formatted.amount);
                 
                 // Získanie krátkeho mena produktu
-                const productName = contract['Názov produktu'] || contract['Typ produktu'] || '';
+                const productName = contract['Názov produktu'] || contract.formatted.productType || '';
                 const shortProductName = productName.length > 30 ? 
                     productName.substring(0, 30) + '...' : productName;
                 
@@ -2216,13 +3200,683 @@
                     <td>
                         ${contract.formatted.anniversaryDate ? 
                             `<div style="font-size: 0.75rem; color: #666;">Výročie: ${contract.formatted.anniversaryDate}</div>
-                             <span class="days-badge ${daysBadgeClass}">${daysToAnniversary}</span>` : 
+                             <span class="days-badge ${daysBadgeClass}">${daysText}</span>` : 
                             '<div style="font-size: 0.75rem; color: #666;">Bez výročia</div>'}
                     </td>
                 `;
                 
                 tableBody.appendChild(row);
             });
+        }
+        
+        // Aktualizácia zoznamu klientov
+        function updateClientsList() {
+            const tableBody = document.getElementById('clients-table-body');
+            const clientsCount = Object.keys(clientsData).length;
+            
+            document.getElementById('clients-count').textContent = clientsCount;
+            
+            if (clientsCount === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="no-data">Žiadni klienti</td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            tableBody.innerHTML = '';
+            
+            // Zoradiť klientov podľa celkovej ročnej sumy
+            const sortedClients = Object.values(clientsData).sort((a, b) => 
+                b.totalAnnualAmount - a.totalAnnualAmount
+            );
+            
+            sortedClients.forEach(client => {
+                // Vytvoriť zoznam produktových odznakov
+                const productBadges = Array.from(client.productTypes).map(productType => {
+                    let badgeClass = '';
+                    let badgeText = '';
+                    
+                    // Klasifikácia produktov
+                    if (productType === 'UV') {
+                        badgeClass = 'product-loan';
+                        badgeText = 'Úver';
+                    } else if (productType === 'F' || productType === 'FS') {
+                        badgeClass = 'product-investment';
+                        badgeText = 'Investícia';
+                    } else if (productType === 'ZH' || productType === 'ZP') {
+                        badgeClass = 'product-insurance';
+                        badgeText = 'Životné poistenie';
+                    } else if (productType === 'PZP' || productType === 'DBD' || productType === 'N' || productType === 'KAS') {
+                        badgeClass = 'product-property';
+                        badgeText = 'Majetok';
+                    } else {
+                        badgeClass = 'product-type-badge';
+                        badgeText = productType;
+                    }
+                    
+                    return `<span class="product-badge ${badgeClass}">${badgeText}</span>`;
+                }).join(' ');
+                
+                // Kontaktné informácie
+                const contactInfo = [];
+                if (client.email) contactInfo.push(`<div><i class="fas fa-envelope"></i> ${client.email}</div>`);
+                if (client.phone) contactInfo.push(`<div><i class="fas fa-phone"></i> ${client.phone}</div>`);
+                
+                // Nájsť clientId pre tohto klienta
+                const clientId = Object.keys(clientsData).find(id => clientsData[id].name === client.name);
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div><span class="client-name">${client.name}</span></div>
+                        ${client.isCompany ? 
+                            '<div style="font-size: 0.75rem; color: #666;">(Právnická osoba)</div>' : ''}
+                    </td>
+                    <td class="client-contact">
+                        ${contactInfo.join('') || 'Žiadne kontaktné údaje'}
+                    </td>
+                    <td>
+                        <div class="client-products">
+                            ${productBadges || 'Žiadne produkty'}
+                        </div>
+                        <div class="client-products-summary">
+                            Typy: ${Array.from(client.productTypes).join(', ')}
+                        </div>
+                    </td>
+                    <td>${client.contracts.length}</td>
+                    <td>${formatAmount(client.totalAnnualAmount.toString())}</td>
+                    <td>${client.lastContractDate || 'N/A'}</td>
+                    <td>
+                        <button class="btn-details view-client-details" data-client-id="${clientId}">
+                            <i class="fas fa-eye"></i> Detail
+                        </button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            // Pridať event listenery pre tlačidlá detailu
+            document.querySelectorAll('.view-client-details').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const clientId = this.getAttribute('data-client-id');
+                    showClientDetails(clientId);
+                });
+            });
+        }
+        
+        // Funkcia na analýzu potrieb klienta
+        function analyzeClientNeeds(client) {
+            const needs = [];
+            const hasLoans = client.productTypes.has('UV');
+            const hasInsurance = client.productTypes.has('ZH') || client.productTypes.has('ZP');
+            const hasInvestments = client.productTypes.has('F') || client.productTypes.has('FS');
+            const hasProperty = client.productTypes.has('PZP') || client.productTypes.has('DBD') || 
+                               client.productTypes.has('N') || client.productTypes.has('KAS');
+            
+            // Cross-selling príležitosti
+            if (hasLoans && !hasInsurance) {
+                needs.push({
+                    type: 'cross-selling',
+                    priority: 'high',
+                    message: 'Klient má úver, ale nemá životné poistenie',
+                    recommendedProduct: 'Životné poistenie (ZH/ZP)',
+                    reason: 'Zabezpečenie splácania úveru v prípade neočakávanej udalosti',
+                    icon: 'fas fa-shield-alt'
+                });
+            }
+            
+            if (hasInvestments && !hasInsurance) {
+                needs.push({
+                    type: 'cross-selling',
+                    priority: 'medium',
+                    message: 'Klient investuje, ale nemá životné poistenie',
+                    recommendedProduct: 'Životné poistenie (ZH/ZP)',
+                    reason: 'Ochrana investícií a zabezpečenie rodiny',
+                    icon: 'fas fa-chart-line'
+                });
+            }
+            
+            if ((hasLoans || hasProperty) && !hasInsurance) {
+                needs.push({
+                    type: 'cross-selling',
+                    priority: 'medium',
+                    message: 'Klient má poistený majetok bez životného poistenia',
+                    recommendedProduct: 'Životné poistenie (ZH/ZP)',
+                    reason: 'Komplexná ochrana pred finančnými strátami',
+                    icon: 'fas fa-home'
+                });
+            }
+            
+            // Up-selling príležitosti
+            if (hasInsurance && client.totalAnnualAmount < 480) {
+                needs.push({
+                    type: 'up-selling',
+                    priority: 'medium',
+                    message: 'Nízka hodnota životného poistenia',
+                    recommendedProduct: 'Životné poistenie (ZH/ZP)',
+                    reason: 'Navýšiť krytie podľa aktuálnych potrieb',
+                    icon: 'fas fa-arrow-up'
+                });
+            }
+            
+            if (hasInvestments && client.totalAnnualAmount < 600) {
+                needs.push({
+                    type: 'up-selling',
+                    priority: 'low',
+                    message: 'Nízka hodnota investícií',
+                    recommendedProduct: 'Investície (F/FS)',
+                    reason: 'Zvýšiť investičný potenciál',
+                    icon: 'fas fa-chart-line'
+                });
+            }
+            
+            // Nové produkty
+            if (client.productTypes.size === 1) {
+                const singleProduct = Array.from(client.productTypes)[0];
+                let recommended = '';
+                
+                if (singleProduct === 'UV') {
+                    recommended = 'Investície (F/FS) alebo Životné poistenie (ZH/ZP)';
+                } else if (singleProduct === 'ZH' || singleProduct === 'ZP') {
+                    recommended = 'Investície (F/FS) alebo Majetkové poistenie (PZP/DBD)';
+                } else if (singleProduct === 'F' || singleProduct === 'FS') {
+                    recommended = 'Životné poistenie (ZH/ZP) alebo Majetkové poistenie (PZP/DBD)';
+                }
+                
+                if (recommended) {
+                    needs.push({
+                        type: 'new-client',
+                        priority: 'high',
+                        message: 'Klient má len jeden typ produktu',
+                        recommendedProduct: recommended,
+                        reason: 'Diverzifikácia finančného portfólia',
+                        icon: 'fas fa-user-plus'
+                    });
+                }
+            }
+            
+            return needs;
+        }
+        
+        // Aktualizácia príležitostí
+        function updateOpportunities() {
+            if (Object.keys(clientsData).length === 0) return;
+            
+            let crossSellingCount = 0;
+            let upSellingCount = 0;
+            let anniversaryCount = 0;
+            let newClientsCount = 0;
+            
+            const crossSellingList = document.getElementById('cross-selling-list');
+            const upSellingList = document.getElementById('up-selling-list');
+            const anniversaryList = document.getElementById('anniversary-list-opportunities');
+            const newClientsList = document.getElementById('new-clients-list');
+            
+            crossSellingList.innerHTML = '';
+            upSellingList.innerHTML = '';
+            anniversaryList.innerHTML = '';
+            newClientsList.innerHTML = '';
+            
+            // Prejsť všetkých klientov a analyzovať ich potreby
+            Object.entries(clientsData).forEach(([clientId, client]) => {
+                // Analýza potrieb
+                const needs = analyzeClientNeeds(client);
+                
+                // Pridať potreby do príslušných kategórií
+                needs.forEach(need => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'opportunity-item';
+                    listItem.innerHTML = `
+                        <div>
+                            <span class="opportunity-priority priority-${need.priority}">${need.priority}</span>
+                            <strong>${client.name}</strong>
+                        </div>
+                        <div style="font-size: 0.8rem; margin-top: 5px;">
+                            <i class="${need.icon}"></i> ${need.message}
+                        </div>
+                        <div style="font-size: 0.75rem; color: #666; margin-top: 3px;">
+                            Odporúčaný produkt: ${need.recommendedProduct}
+                        </div>
+                    `;
+                    
+                    // Pridať click event na zobrazenie detailu klienta
+                    listItem.addEventListener('click', () => {
+                        showClientDetails(clientId);
+                    });
+                    
+                    switch (need.type) {
+                        case 'cross-selling':
+                            crossSellingCount++;
+                            crossSellingList.appendChild(listItem);
+                            break;
+                        case 'up-selling':
+                            upSellingCount++;
+                            upSellingList.appendChild(listItem);
+                            break;
+                        case 'new-client':
+                            newClientsCount++;
+                            newClientsList.appendChild(listItem);
+                            break;
+                    }
+                });
+                
+                // Pridať výročia ako príležitosti
+                client.contracts.forEach(contract => {
+                    if (contract.formatted.daysToAnniversary >= 0 && contract.formatted.daysToAnniversary <= 60) {
+                        anniversaryCount++;
+                        
+                        const listItem = document.createElement('li');
+                        listItem.className = 'opportunity-item';
+                        listItem.innerHTML = `
+                            <div>
+                                <span class="opportunity-priority ${contract.formatted.daysToAnniversary <= 30 ? 'priority-high' : 'priority-medium'}">
+                                    ${contract.formatted.daysToAnniversary <= 7 ? 'Kritické' : 
+                                      contract.formatted.daysToAnniversary <= 30 ? 'Vysoké' : 'Stredné'}
+                                </span>
+                                <strong>${client.name}</strong>
+                            </div>
+                            <div style="font-size: 0.8rem; margin-top: 5px;">
+                                <i class="fas fa-calendar-alt"></i> ${contract['Názov produktu'] || contract.formatted.productType}
+                            </div>
+                            <div style="font-size: 0.75rem; color: #666; margin-top: 3px;">
+                                Výročie: ${contract.formatted.anniversaryDate} (o ${contract.formatted.daysToAnniversary} dní)
+                            </div>
+                        `;
+                        
+                        listItem.addEventListener('click', () => {
+                            showClientDetails(clientId);
+                        });
+                        
+                        anniversaryList.appendChild(listItem);
+                    }
+                });
+            });
+            
+            // Aktualizovať počty
+            document.getElementById('cross-selling-count').textContent = crossSellingCount;
+            document.getElementById('up-selling-count').textContent = upSellingCount;
+            document.getElementById('anniversary-count').textContent = anniversaryCount;
+            document.getElementById('new-clients-count').textContent = newClientsCount;
+            document.getElementById('opportunities-count').textContent = 
+                crossSellingCount + upSellingCount + anniversaryCount + newClientsCount;
+            
+            // Ak nie sú žiadne príležitosti, zobraziť správu
+            if (crossSellingCount === 0) {
+                crossSellingList.innerHTML = '<li class="no-data">Žiadne príležitosti</li>';
+            }
+            if (upSellingCount === 0) {
+                upSellingList.innerHTML = '<li class="no-data">Žiadne príležitosti</li>';
+            }
+            if (anniversaryCount === 0) {
+                anniversaryList.innerHTML = '<li class="no-data">Žiadne príležitosti</li>';
+            }
+            if (newClientsCount === 0) {
+                newClientsList.innerHTML = '<li class="no-data">Žiadne príležitosti</li>';
+            }
+        }
+        
+        // Zobrazenie detailu klienta
+        function showClientDetails(clientId) {
+            const client = clientsData[clientId];
+            if (!client) return;
+            
+            currentClientId = clientId;
+            
+            // Naplniť modal informáciami
+            document.getElementById('modal-client-name').textContent = client.name;
+            document.getElementById('modal-client-type').textContent = client.isCompany ? 'Právnická osoba' : 'Fyzická osoba';
+            document.getElementById('modal-client-phone').textContent = client.phone || 'Nie je k dispozícii';
+            document.getElementById('modal-client-email').textContent = client.email || 'Nie je k dispozícii';
+            document.getElementById('modal-contracts-count').textContent = client.contracts.length;
+            document.getElementById('modal-total-amount').textContent = formatAmount(client.totalAnnualAmount.toString());
+            
+            // Zobraziť produkty
+            const productsContainer = document.getElementById('modal-client-products');
+            productsContainer.innerHTML = '';
+            
+            Array.from(client.productTypes).forEach(productType => {
+                let badgeClass = '';
+                let badgeText = '';
+                
+                if (productType === 'UV') {
+                    badgeClass = 'product-loan';
+                    badgeText = 'Úver';
+                } else if (productType === 'F' || productType === 'FS') {
+                    badgeClass = 'product-investment';
+                    badgeText = 'Investícia';
+                } else if (productType === 'ZH' || productType === 'ZP') {
+                    badgeClass = 'product-insurance';
+                    badgeText = 'Životné poistenie';
+                } else if (productType === 'PZP' || productType === 'DBD' || productType === 'N' || productType === 'KAS') {
+                    badgeClass = 'product-property';
+                    badgeText = 'Majetok';
+                } else {
+                    badgeClass = 'product-type-badge';
+                    badgeText = productType;
+                }
+                
+                const badge = document.createElement('span');
+                badge.className = `product-badge ${badgeClass}`;
+                badge.textContent = badgeText;
+                productsContainer.appendChild(badge);
+            });
+            
+            // Načítať a zobraziť poznámky
+            const notes = userSystem.getClientNotes(userSystem.getCurrentUser(), clientId);
+            modalClientNotes.value = notes || '';
+            
+            // Zobraziť doporučenia
+            const recommendationsContainer = document.getElementById('modal-client-recommendations');
+            recommendationsContainer.innerHTML = '';
+            
+            const needs = analyzeClientNeeds(client);
+            
+            if (needs.length === 0) {
+                recommendationsContainer.innerHTML = '<p class="no-data" style="padding: 20px;">Žiadne aktuálne doporučenia</p>';
+            } else {
+                needs.forEach(need => {
+                    const recElement = document.createElement('div');
+                    recElement.className = 'opportunity-item';
+                    recElement.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                            <i class="${need.icon}"></i>
+                            <div>
+                                <strong>${need.recommendedProduct}</strong>
+                                <div style="font-size: 0.8rem; color: #666;">${need.message}</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.75rem; color: #666; margin-top: 5px;">
+                            ${need.reason}
+                        </div>
+                    `;
+                    recommendationsContainer.appendChild(recElement);
+                });
+            }
+            
+            // Zobraziť modal
+            clientModal.style.display = 'block';
+        }
+        
+        // Kalendár funkcie
+        function loadMeetings() {
+            const meetings = userSystem.getMeetings(userSystem.getCurrentUser());
+            updateCalendar();
+        }
+        
+        function populateClientDropdown() {
+            meetingClient.innerHTML = '<option value="">Vyberte klienta</option>';
+            
+            Object.entries(clientsData).forEach(([clientId, client]) => {
+                const option = document.createElement('option');
+                option.value = clientId;
+                option.textContent = client.name;
+                meetingClient.appendChild(option);
+            });
+        }
+        
+        function saveMeeting() {
+            const clientId = meetingClient.value;
+            const dateTime = meetingDate.value;
+            const type = meetingType.value;
+            const duration = parseInt(meetingDuration.value);
+            const notes = meetingNotes.value;
+            
+            if (!clientId || !dateTime) {
+                alert('Vyplňte povinné polia: Klient a Dátum');
+                return;
+            }
+            
+            const client = clientsData[clientId];
+            if (!client) {
+                alert('Neplatný klient');
+                return;
+            }
+            
+            const meeting = {
+                clientId: clientId,
+                clientName: client.name,
+                dateTime: dateTime,
+                type: type,
+                duration: duration,
+                notes: notes,
+                createdAt: new Date().toISOString()
+            };
+            
+            userSystem.saveMeeting(userSystem.getCurrentUser(), meeting);
+            alert('Schôdzka bola uložená');
+            
+            meetingForm.style.display = 'none';
+            clearMeetingForm();
+            updateCalendar();
+        }
+        
+        function clearMeetingForm() {
+            meetingClient.value = '';
+            meetingDate.value = '';
+            meetingType.value = 'consultation';
+            meetingDuration.value = '60';
+            meetingNotes.value = '';
+        }
+        
+        function updateCalendar() {
+            const meetings = userSystem.getMeetings(userSystem.getCurrentUser());
+            const now = new Date();
+            
+            // Aktualizovať nadchádzajúce schôdzky
+            const upcomingList = document.getElementById('upcoming-meetings-list');
+            const pastList = document.getElementById('past-meetings-list');
+            
+            upcomingList.innerHTML = '';
+            pastList.innerHTML = '';
+            
+            const upcomingMeetings = meetings.filter(m => new Date(m.dateTime) >= now)
+                .sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
+            
+            const pastMeetings = meetings.filter(m => new Date(m.dateTime) < now)
+                .sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
+            
+            if (upcomingMeetings.length === 0) {
+                upcomingList.innerHTML = '<li class="no-data">Žiadne naplánované schôdzky</li>';
+            } else {
+                upcomingMeetings.forEach(meeting => {
+                    const li = document.createElement('li');
+                    li.className = 'opportunity-item';
+                    li.innerHTML = `
+                        <div>
+                            <strong>${meeting.clientName}</strong>
+                        </div>
+                        <div style="font-size: 0.8rem; margin-top: 5px;">
+                            <i class="fas fa-calendar"></i> ${formatDateTime(meeting.dateTime)}
+                        </div>
+                        <div style="font-size: 0.75rem; color: #666; margin-top: 3px;">
+                            Typ: ${getMeetingTypeLabel(meeting.type)} | Trvanie: ${meeting.duration} min
+                        </div>
+                    `;
+                    li.addEventListener('click', () => {
+                        if (confirm('Odstrániť túto schôdzku?')) {
+                            userSystem.removeMeeting(userSystem.getCurrentUser(), meeting.id);
+                            updateCalendar();
+                        }
+                    });
+                    upcomingList.appendChild(li);
+                });
+            }
+            
+            if (pastMeetings.length === 0) {
+                pastList.innerHTML = '<li class="no-data">Žiadne minulé schôdzky</li>';
+            } else {
+                pastMeetings.slice(0, 5).forEach(meeting => {
+                    const li = document.createElement('li');
+                    li.className = 'opportunity-item';
+                    li.innerHTML = `
+                        <div>
+                            <strong>${meeting.clientName}</strong>
+                        </div>
+                        <div style="font-size: 0.8rem; margin-top: 5px;">
+                            <i class="fas fa-history"></i> ${formatDateTime(meeting.dateTime)}
+                        </div>
+                        <div style="font-size: 0.75rem; color: #666; margin-top: 3px;">
+                            Typ: ${getMeetingTypeLabel(meeting.type)}
+                        </div>
+                    `;
+                    pastList.appendChild(li);
+                });
+            }
+            
+            // Aktualizovať kalendár týždňa
+            updateCalendarWeek();
+            
+            // Aktualizovať výročia pre kalendár
+            updateCalendarAnniversaries();
+        }
+        
+        function updateCalendarWeek() {
+            const calendarWeek = document.getElementById('calendarWeek');
+            calendarWeek.innerHTML = '';
+            
+            const days = ['Nedeľa', 'Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota'];
+            const today = new Date();
+            
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'day-header';
+                dayHeader.textContent = `${days[date.getDay()]} ${date.getDate()}.${date.getMonth() + 1}.`;
+                
+                dayElement.appendChild(dayHeader);
+                
+                // Nájsť schôdzky pre tento deň
+                const meetings = userSystem.getMeetings(userSystem.getCurrentUser());
+                const dayMeetings = meetings.filter(m => {
+                    const meetingDate = new Date(m.dateTime);
+                    return meetingDate.getDate() === date.getDate() &&
+                           meetingDate.getMonth() === date.getMonth() &&
+                           meetingDate.getFullYear() === date.getFullYear();
+                });
+                
+                dayMeetings.forEach(meeting => {
+                    const meetingElement = document.createElement('div');
+                    meetingElement.className = 'meeting-item';
+                    meetingElement.innerHTML = `
+                        <strong>${meeting.clientName}</strong><br>
+                        <small>${formatTime(meeting.dateTime)} - ${getMeetingTypeLabel(meeting.type)}</small>
+                    `;
+                    meetingElement.addEventListener('click', () => {
+                        if (confirm('Odstrániť túto schôdzku?')) {
+                            userSystem.removeMeeting(userSystem.getCurrentUser(), meeting.id);
+                            updateCalendar();
+                        }
+                    });
+                    dayElement.appendChild(meetingElement);
+                });
+                
+                calendarWeek.appendChild(dayElement);
+            }
+        }
+        
+        function updateCalendarAnniversaries() {
+            const tableBody = document.getElementById('calendar-anniversary-table');
+            tableBody.innerHTML = '';
+            
+            // Získať blížiace sa výročia (do 30 dní)
+            const upcomingAnniversaries = [];
+            
+            Object.entries(clientsData).forEach(([clientId, client]) => {
+                client.contracts.forEach(contract => {
+                    if (contract.formatted.daysToAnniversary >= 0 && contract.formatted.daysToAnniversary <= 30) {
+                        upcomingAnniversaries.push({
+                            clientId: clientId,
+                            clientName: client.name,
+                            product: contract['Názov produktu'] || contract.formatted.productType,
+                            anniversaryDate: contract.formatted.anniversaryDate,
+                            daysToAnniversary: contract.formatted.daysToAnniversary
+                        });
+                    }
+                });
+            });
+            
+            // Zoradiť podľa dní do výročia
+            upcomingAnniversaries.sort((a, b) => a.daysToAnniversary - b.daysToAnniversary);
+            
+            if (upcomingAnniversaries.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="no-data">Žiadne blížiace sa výročia</td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            upcomingAnniversaries.slice(0, 10).forEach(anniversary => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${anniversary.clientName}</td>
+                    <td>${anniversary.product}</td>
+                    <td>${anniversary.anniversaryDate}</td>
+                    <td><span class="days-badge ${getDaysBadgeClass(anniversary.daysToAnniversary)}">${anniversary.daysToAnniversary} dní</span></td>
+                    <td>
+                        <button class="btn-details schedule-meeting" data-client-id="${anniversary.clientId}">
+                            <i class="fas fa-calendar-plus"></i> Naplánovať
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+            
+            // Pridať event listenery pre tlačidlá naplánovania
+            document.querySelectorAll('.schedule-meeting').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const clientId = this.getAttribute('data-client-id');
+                    scheduleMeetingForClient(clientId);
+                });
+            });
+        }
+        
+        function scheduleMeetingForClient(clientId) {
+            const client = clientsData[clientId];
+            if (!client) return;
+            
+            // Zobraziť formulár pre schôdzku
+            meetingForm.style.display = 'block';
+            meetingClient.value = clientId;
+            
+            // Nastaviť dátum na budúci týždeň
+            const nextWeek = new Date();
+            nextWeek.setDate(nextWeek.getDate() + 7);
+            nextWeek.setHours(10, 0, 0, 0); // 10:00
+            nextWeek.setMinutes(nextWeek.getMinutes() - nextWeek.getTimezoneOffset());
+            meetingDate.value = nextWeek.toISOString().slice(0, 16);
+            
+            meetingType.value = 'anniversary';
+            meetingNotes.value = `Schôdzka ohľadom výročia produktu pre klienta ${client.name}`;
+        }
+        
+        function formatDateTime(dateTimeString) {
+            const date = new Date(dateTimeString);
+            return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${formatTime(dateTimeString)}`;
+        }
+        
+        function formatTime(dateTimeString) {
+            const date = new Date(dateTimeString);
+            return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+        }
+        
+        function getMeetingTypeLabel(type) {
+            const labels = {
+                'consultation': 'Konzultácia',
+                'signature': 'Podpis zmluvy',
+                'review': 'Prehodnotenie',
+                'anniversary': 'Výročie'
+            };
+            return labels[type] || type;
         }
         
         // Aktualizácia dashboardu
@@ -2280,7 +3934,6 @@
             const nearAnniversaries = filteredContracts.filter(c => c.formatted.daysToAnniversary > 7 && c.formatted.daysToAnniversary <= 30).length;
             const upcomingAnniversaries = filteredContracts.filter(c => c.formatted.daysToAnniversary > 30 && c.formatted.daysToAnniversary <= 90).length;
             const futureAnniversaries = filteredContracts.filter(c => c.formatted.daysToAnniversary > 90).length;
-            const pastAnniversaries = filteredContracts.filter(c => c.formatted.daysToAnniversary < 0).length;
             
             // Graf 1: Rozdelenie podľa typov produktov
             const productsCtx = document.getElementById('productsChart').getContext('2d');
@@ -2323,16 +3976,15 @@
             anniversaryChart = new Chart(anniversaryCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Do 7 dní', 'Do 30 dní', 'Do 90 dní', 'Viac ako 90 dní', 'Prešli'],
+                    labels: ['Do 7 dní', 'Do 30 dní', 'Do 90 dní', 'Viac ako 90 dní'],
                     datasets: [{
                         label: 'Počet výročí',
-                        data: [soonAnniversaries, nearAnniversaries, upcomingAnniversaries, futureAnniversaries, pastAnniversaries],
+                        data: [soonAnniversaries, nearAnniversaries, upcomingAnniversaries, futureAnniversaries],
                         backgroundColor: [
                             '#e74c3c', // Červená pre kritické
                             '#f39c12', // Oranžová pre varovanie
                             '#2ecc71', // Zelená pre OK
-                            '#3498db', // Modrá pre budúce
-                            '#95a5a6'  // Sivá pre minulé
+                            '#3498db'  // Modrá pre budúce
                         ],
                         borderWidth: 1
                     }]
@@ -2373,7 +4025,7 @@
             tableBody.innerHTML = '';
             
             upcomingContracts.forEach(contract => {
-                const daysBadgeClass = getDaysBadgeClass(`${contract.formatted.daysToAnniversary} dní`);
+                const daysBadgeClass = getDaysBadgeClass(contract.formatted.daysToAnniversary);
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${contract.formatted.clientName}</td>
@@ -2438,54 +4090,13 @@
             });
         }
         
-        // Výpočet dní do výročia
-        function calculateDaysToAnniversary(dateString) {
-            if (!dateString || dateString.trim() === '') return 'N/A';
-            
-            const dateParts = dateString.split('.');
-            
-            if (dateParts.length === 3) {
-                const day = parseInt(dateParts[0]);
-                const month = parseInt(dateParts[1]) - 1;
-                const year = parseInt(dateParts[2]);
-                
-                if (isNaN(day) || isNaN(month) || isNaN(year)) {
-                    return 'N/A';
-                }
-                
-                const today = new Date();
-                const anniversaryDate = new Date(year, month, day);
-                
-                // Ak už výročie prešlo, vrátiť 0
-                if (anniversaryDate < today) {
-                    return 'Prešlo';
-                }
-                
-                // Vypočítať rozdiel v dňoch
-                const diffTime = anniversaryDate - today;
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                
-                return `${diffDays} dní`;
-            }
-            
-            return 'N/A';
-        }
-        
         // Určenie triedy pre badge podľa počtu dní
-        function getDaysBadgeClass(daysString) {
-            if (typeof daysString === 'string') {
-                if (daysString === 'N/A' || daysString === 'Prešlo') return 'days-neutral';
-                
-                const daysMatch = daysString.match(/(\d+)/);
-                if (daysMatch) {
-                    const days = parseInt(daysMatch[1]);
-                    
-                    if (days <= 7) return 'days-critical';
-                    if (days <= 30) return 'days-warning';
-                    if (days <= 90) return 'days-ok';
-                    return 'days-neutral';
-                }
-            }
+        function getDaysBadgeClass(days) {
+            if (days === 9999 || days < 0) return 'days-neutral';
+            
+            if (days <= 7) return 'days-critical';
+            if (days <= 30) return 'days-warning';
+            if (days <= 90) return 'days-ok';
             return 'days-neutral';
         }
         
@@ -2528,6 +4139,13 @@
         registerConfirmPassword.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 registerBtn.click();
+            }
+        });
+        
+        // Zatvorenie modalu kliknutím mimo neho
+        window.addEventListener('click', function(event) {
+            if (event.target === clientModal) {
+                clientModal.style.display = 'none';
             }
         });
         
